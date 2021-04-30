@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fc.dao.ReaderTblMapper">
+  <cache/>
+  <resultMap id="BaseResultMap" type="com.fc.entity.ReaderTbl">
+    <id column="reader_id" jdbcType="INTEGER" property="readerId" />
+    <result column="reader_name" jdbcType="VARCHAR" property="readerName" />
+    <result column="reader_gender" jdbcType="VARCHAR" property="readerGender" />
+    <result column="reader_barcode" jdbcType="VARCHAR" property="readerBarcode" />
+    <result column="reader_profession" jdbcType="VARCHAR" property="readerProfession" />
+    <result column="reader_birth" jdbcType="TIMESTAMP" property="readerBirth" />
+    <result column="reader_document_type" jdbcType="VARCHAR" property="readerDocumentType" />
+    <result column="reader_document_number" jdbcType="VARCHAR" property="readerDocumentNumber" />
+    <result column="reader_email" jdbcType="VARCHAR" property="readerEmail" />
+    <result column="reader_register_date" jdbcType="TIMESTAMP" property="readerRegisterDate" />
+    <result column="borrowed_book_count" jdbcType="INTEGER" property="borrowedBookCount" />
+    <result column="remaining_book_count" jdbcType="INTEGER" property="remainingBookCount" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    reader_id, reader_name, reader_gender, reader_barcode, reader_profession, reader_birth, 
+    reader_document_type, reader_document_number, reader_email, reader_register_date, 
+    borrowed_book_count, remaining_book_count, operator_id
+  </sql>
+  <select id="selectByExample" parameterType="com.fc.entity.ReaderTblExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from reader_tbl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <!--id查询-->
+  <!--id查询-->
+  <!--id查询-->
+  <!--id查询-->
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from reader_tbl
+    where reader_id = #{readerId,jdbcType=INTEGER}
+  </select>
+  <!--根据id删除-->
+  <!--根据id删除-->
+  <!--根据id删除-->
+  <!--根据id删除-->
+  <!--根据id删除-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reader_tbl
+    where reader_id = #{readerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fc.entity.ReaderTblExample">
+    delete from reader_tbl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fc.entity.ReaderTbl">
+    insert into reader_tbl (reader_id, reader_name, reader_gender, 
+      reader_barcode, reader_profession, reader_birth, 
+      reader_document_type, reader_document_number, 
+      reader_email, reader_register_date, borrowed_book_count, 
+      remaining_book_count, operator_id)
+    values (#{readerId,jdbcType=INTEGER}, #{readerName,jdbcType=VARCHAR}, #{readerGender,jdbcType=VARCHAR}, 
+      #{readerBarcode,jdbcType=VARCHAR}, #{readerProfession,jdbcType=VARCHAR}, #{readerBirth,jdbcType=TIMESTAMP}, 
+      #{readerDocumentType,jdbcType=VARCHAR}, #{readerDocumentNumber,jdbcType=VARCHAR}, 
+      #{readerEmail,jdbcType=VARCHAR}, #{readerRegisterDate,jdbcType=TIMESTAMP}, #{borrowedBookCount,jdbcType=INTEGER}, 
+      #{remainingBookCount,jdbcType=INTEGER}, #{operatorId,jdbcType=INTEGER})
+  </insert>
+  <!--插入-->
+  <!--插入-->
+  <!--插入-->
+  <insert id="insertSelective" parameterType="com.fc.entity.ReaderTbl">
+    insert into reader_tbl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="readerId != null">
+        reader_id,
+      </if>
+      <if test="readerName != null">
+        reader_name,
+      </if>
+      <if test="readerGender != null">
+        reader_gender,
+      </if>
+      <if test="readerBarcode != null">
+        reader_barcode,
+      </if>
+      <if test="readerProfession != null">
+        reader_profession,
+      </if>
+      <if test="readerBirth != null">
+        reader_birth,
+      </if>
+      <if test="readerDocumentType != null">
+        reader_document_type,
+      </if>
+      <if test="readerDocumentNumber != null">
+        reader_document_number,
+      </if>
+      <if test="readerEmail != null">
+        reader_email,
+      </if>
+      <if test="readerRegisterDate != null">
+        reader_register_date,
+      </if>
+      <if test="borrowedBookCount != null">
+        borrowed_book_count,
+      </if>
+      <if test="remainingBookCount != null">
+        remaining_book_count,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="readerId != null">
+        #{readerId,jdbcType=INTEGER},
+      </if>
+      <if test="readerName != null">
+        #{readerName,jdbcType=VARCHAR},
+      </if>
+      <if test="readerGender != null">
+        #{readerGender,jdbcType=VARCHAR},
+      </if>
+      <if test="readerBarcode != null">
+        #{readerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="readerProfession != null">
+        #{readerProfession,jdbcType=VARCHAR},
+      </if>
+      <if test="readerBirth != null">
+        #{readerBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readerDocumentType != null">
+        #{readerDocumentType,jdbcType=VARCHAR},
+      </if>
+      <if test="readerDocumentNumber != null">
+        #{readerDocumentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="readerEmail != null">
+        #{readerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="readerRegisterDate != null">
+        #{readerRegisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="borrowedBookCount != null">
+        #{borrowedBookCount,jdbcType=INTEGER},
+      </if>
+      <if test="remainingBookCount != null">
+        #{remainingBookCount,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fc.entity.ReaderTblExample" resultType="java.lang.Long">
+    select count(*) from reader_tbl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update reader_tbl
+    <set>
+      <if test="record.readerId != null">
+        reader_id = #{record.readerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.readerName != null">
+        reader_name = #{record.readerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readerGender != null">
+        reader_gender = #{record.readerGender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readerBarcode != null">
+        reader_barcode = #{record.readerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readerProfession != null">
+        reader_profession = #{record.readerProfession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readerBirth != null">
+        reader_birth = #{record.readerBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.readerDocumentType != null">
+        reader_document_type = #{record.readerDocumentType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readerDocumentNumber != null">
+        reader_document_number = #{record.readerDocumentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readerEmail != null">
+        reader_email = #{record.readerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readerRegisterDate != null">
+        reader_register_date = #{record.readerRegisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.borrowedBookCount != null">
+        borrowed_book_count = #{record.borrowedBookCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.remainingBookCount != null">
+        remaining_book_count = #{record.remainingBookCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.operatorId != null">
+        operator_id = #{record.operatorId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update reader_tbl
+    set reader_id = #{record.readerId,jdbcType=INTEGER},
+      reader_name = #{record.readerName,jdbcType=VARCHAR},
+      reader_gender = #{record.readerGender,jdbcType=VARCHAR},
+      reader_barcode = #{record.readerBarcode,jdbcType=VARCHAR},
+      reader_profession = #{record.readerProfession,jdbcType=VARCHAR},
+      reader_birth = #{record.readerBirth,jdbcType=TIMESTAMP},
+      reader_document_type = #{record.readerDocumentType,jdbcType=VARCHAR},
+      reader_document_number = #{record.readerDocumentNumber,jdbcType=VARCHAR},
+      reader_email = #{record.readerEmail,jdbcType=VARCHAR},
+      reader_register_date = #{record.readerRegisterDate,jdbcType=TIMESTAMP},
+      borrowed_book_count = #{record.borrowedBookCount,jdbcType=INTEGER},
+      remaining_book_count = #{record.remainingBookCount,jdbcType=INTEGER},
+      operator_id = #{record.operatorId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <!--修改读者信息-->
+  <!--修改读者信息-->
+  <!--修改读者信息-->
+  <!--修改读者信息-->
+  <update id="updateByPrimaryKeySelective" parameterType="com.fc.entity.ReaderTbl">
+    update reader_tbl
+    <set>
+      <if test="readerName != null">
+        reader_name = #{readerName,jdbcType=VARCHAR},
+      </if>
+      <if test="readerGender != null">
+        reader_gender = #{readerGender,jdbcType=VARCHAR},
+      </if>
+      <if test="readerBarcode != null">
+        reader_barcode = #{readerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="readerProfession != null">
+        reader_profession = #{readerProfession,jdbcType=VARCHAR},
+      </if>
+      <if test="readerBirth != null">
+        reader_birth = #{readerBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readerDocumentType != null">
+        reader_document_type = #{readerDocumentType,jdbcType=VARCHAR},
+      </if>
+      <if test="readerDocumentNumber != null">
+        reader_document_number = #{readerDocumentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="readerEmail != null">
+        reader_email = #{readerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="readerRegisterDate != null">
+        reader_register_date = #{readerRegisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="borrowedBookCount != null">
+        borrowed_book_count = #{borrowedBookCount,jdbcType=INTEGER},
+      </if>
+      <if test="remainingBookCount != null">
+        remaining_book_count = #{remainingBookCount,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where reader_id = #{readerId,jdbcType=INTEGER}
+  </update>
+  <!--修改用户信息-->
+  <!--修改用户信息-->
+  <!--修改用户信息-->
+  <!--修改用户信息-->
+  <update id="updateByPrimaryKey" parameterType="com.fc.entity.ReaderTbl">
+    update reader_tbl
+    set reader_name = #{readerName,jdbcType=VARCHAR},
+      reader_gender = #{readerGender,jdbcType=VARCHAR},
+      reader_barcode = #{readerBarcode,jdbcType=VARCHAR},
+      reader_profession = #{readerProfession,jdbcType=VARCHAR},
+      reader_birth = #{readerBirth,jdbcType=TIMESTAMP},
+      reader_document_type = #{readerDocumentType,jdbcType=VARCHAR},
+      reader_document_number = #{readerDocumentNumber,jdbcType=VARCHAR},
+      reader_email = #{readerEmail,jdbcType=VARCHAR},
+      reader_register_date = #{readerRegisterDate,jdbcType=TIMESTAMP},
+      borrowed_book_count = #{borrowedBookCount,jdbcType=INTEGER},
+      remaining_book_count = #{remainingBookCount,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=INTEGER}
+    where reader_id = #{readerId,jdbcType=INTEGER}
+  </update>
+<!--  查询所有读者信息-->
+<!--  查询所有读者信息-->
+<!--  查询所有读者信息-->
+<!--  查询所有读者信息-->
+<!--  查询所有读者信息-->
+
+  <resultMap id="ReaderInfo_Tbl" type="com.fc.entity.ReaderTbl">
+    <id column="reader_id" jdbcType="INTEGER" property="readerId" />
+    <result column="reader_name" jdbcType="VARCHAR" property="readerName" />
+    <result column="reader_gender" jdbcType="VARCHAR" property="readerGender" />
+    <result column="reader_barcode" jdbcType="VARCHAR" property="readerBarcode" />
+    <result column="reader_profession" jdbcType="VARCHAR" property="readerProfession" />
+    <result column="reader_birth" jdbcType="TIMESTAMP" property="readerBirth" />
+    <result column="reader_document_type" jdbcType="VARCHAR" property="readerDocumentType" />
+    <result column="reader_document_number" jdbcType="VARCHAR" property="readerDocumentNumber" />
+    <result column="reader_email" jdbcType="VARCHAR" property="readerEmail" />
+    <result column="reader_register_date" jdbcType="TIMESTAMP" property="readerRegisterDate" />
+    <result column="borrowed_book_count" jdbcType="INTEGER" property="borrowedBookCount" />
+    <result column="remaining_book_count" jdbcType="INTEGER" property="remainingBookCount" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <association property="manager" javaType="com.fc.entity.ManagerTbl">
+      <id column="manager_id" jdbcType="INTEGER" property="managerId" />
+      <result column="manager_name" jdbcType="VARCHAR" property="managerName" />
+      <result column="manager_pwd" jdbcType="VARCHAR" property="managerPwd" />
+    </association>
+  </resultMap>
+
+  <select id="findAllReader" resultMap="ReaderInfo_Tbl">
+    select * from reader_tbl rd  inner join manager_tbl mg on rd.operator_id=mg.manager_id
+  </select>
+
+<!--  添加读者信息-->
+  <insert id="insertReader" useGeneratedKeys="true" keyProperty="readerId">
+    insert into reader_tbl(reader_id, reader_name, reader_gender, reader_barcode, reader_profession, reader_birth, reader_document_type,
+            reader_document_number, reader_email, reader_register_date, borrowed_book_count, remaining_book_count, operator_id)
+    VALUES (#{readerId},#{readerName},#{readerGender},#{readerBarcode},#{readerProfession},#{readerBirth},#{readerDocumentType},
+            #{readerDocumentNumber},#{readerEmail},#{readerRegisterDate},#{borrowedBookCount},#{remainingBookCount},#{operatorId})
+  </insert>
+</mapper>

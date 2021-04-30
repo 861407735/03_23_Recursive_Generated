@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <!--启用二级缓存-->
+        <setting value="true" name="cacheEnabled"/>
+        <!--&lt;!&ndash;启用延时加载&ndash;&gt;-->
+        <!--<setting value="true" name="lazyLoadingEnabled"/>-->
+        <!--&lt;!&ndash;每种属性按需加载&ndash;&gt;-->
+        <!--<setting value="false" name="aggressiveLazyLoading"/>-->
+        <!--开启将下划线映射到驼峰命名的规则规则-->
+        <setting value="true" name="mapUnderscoreToCamelCase"/>
+        <!--&lt;!&ndash;允许多种结果集从一个单独的语句中返回&ndash;&gt;-->
+        <!--<setting value="true" name="multipleResultSetsEnabled"/>-->
+        <!--&lt;!&ndash;使用列标签代替列名&ndash;&gt;-->
+        <!--<setting value="true" name="useColumnLabel"/>-->
+        <!--&lt;!&ndash;允许插入数据中设置主键并返回&ndash;&gt;-->
+        <!--<setting value="true" name="useGeneratedKeys"/>-->
+        <!--&lt;!&ndash;设置默认执行器&ndash;&gt;-->
+        <!--<setting value="SIMPLE" name="defaultExecutorType"/>-->
+        <!--&lt;!&ndash;设置超时时间&ndash;&gt;-->
+        <!--<setting value="25000" name="defaultStatementTimeout"/>-->
+    </settings>
+    <!-- 映射  映射到SQL语句上-->
+    <!--<mappers>-->
+    <!--    &lt;!&ndash; 若不是相对路径 则路径是 com/fa/mapper  要用斜线 &ndash;&gt;-->
+    <!--    <mapper resource="com/fc/mapper/BookcaseTblMapper.xml"></mapper>-->
+    <!--    <mapper resource="com/fc/mapper/BookReturnTblMapper.xml"></mapper>-->
+    <!--    <mapper resource="com/fc/mapper/BooksMapper.xml"></mapper>-->
+    <!--    <mapper resource="com/fc/mapper/BookTblMapper.xml"></mapper>-->
+    <!--    <mapper resource="com/fc/mapper/BookToborrowTblMapper.xml"></mapper>-->
+    <!--    <mapper resource="com/fc/mapper/BookTypeTblMapper.xml"></mapper>-->
+    <!--    <mapper resource="com/fc/mapper/LibraryTblMapper.xml"></mapper>-->
+    <!--    <mapper resource="com/fc/mapper/ManagerTblMapper.xml"></mapper>-->
+    <!--    <mapper resource="com/fc/mapper/ReaderTblMapper.xml"></mapper>-->
+    <!--</mappers>-->
+    <plugins>
+        <!--pageHelper分页插件-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--自动检测当前的数据库链接-->
+            <property name="helperDialect" value="mysql"/>
+
+            <!--分页合理化参数，小于0页显示第一页，大于最后一页显示最后一页-->
+            <property name="reasonable" value="true"/>
+
+            <!--通过 Mapper 接口参数来传递分页参数-->
+            <property name="supportMethodsArguments" value="true"/>
+        </plugin>
+    </plugins>
+</configuration>

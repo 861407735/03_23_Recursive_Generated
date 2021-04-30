@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fc.dao.BookToborrowTblMapper">
+  <cache/>
+  <resultMap id="BaseResultMap" type="com.fc.entity.BookToborrowTbl">
+    <id column="book_toBorrow_id" jdbcType="INTEGER" property="bookToborrowId" />
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="reader_id" jdbcType="INTEGER" property="readerId" />
+    <result column="borrowed_date" jdbcType="TIMESTAMP" property="borrowedDate" />
+    <result column="returned_date" jdbcType="TIMESTAMP" property="returnedDate" />
+    <result column="is_returned" jdbcType="TINYINT" property="isReturned" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    book_toBorrow_id, book_id, reader_id, borrowed_date, returned_date, is_returned
+  </sql>
+  <select id="selectByExample" parameterType="com.fc.entity.BookToborrowTblExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from book_toborrow_tbl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from book_toborrow_tbl
+    where book_toBorrow_id = #{bookToborrowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from book_toborrow_tbl
+    where book_toBorrow_id = #{bookToborrowId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fc.entity.BookToborrowTblExample">
+    delete from book_toborrow_tbl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fc.entity.BookToborrowTbl">
+    insert into book_toborrow_tbl (book_toBorrow_id, book_id, reader_id, 
+      borrowed_date, returned_date, is_returned
+      )
+    values (#{bookToborrowId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{readerId,jdbcType=INTEGER}, 
+      #{borrowedDate,jdbcType=TIMESTAMP}, #{returnedDate,jdbcType=TIMESTAMP}, #{isReturned,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fc.entity.BookToborrowTbl">
+    insert into book_toborrow_tbl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookToborrowId != null">
+        book_toBorrow_id,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="readerId != null">
+        reader_id,
+      </if>
+      <if test="borrowedDate != null">
+        borrowed_date,
+      </if>
+      <if test="returnedDate != null">
+        returned_date,
+      </if>
+      <if test="isReturned != null">
+        is_returned,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookToborrowId != null">
+        #{bookToborrowId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="readerId != null">
+        #{readerId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowedDate != null">
+        #{borrowedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnedDate != null">
+        #{returnedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isReturned != null">
+        #{isReturned,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fc.entity.BookToborrowTblExample" resultType="java.lang.Long">
+    select count(*) from book_toborrow_tbl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update book_toborrow_tbl
+    <set>
+      <if test="record.bookToborrowId != null">
+        book_toBorrow_id = #{record.bookToborrowId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookId != null">
+        book_id = #{record.bookId,jdbcType=INTEGER},
+      </if>
+      <if test="record.readerId != null">
+        reader_id = #{record.readerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.borrowedDate != null">
+        borrowed_date = #{record.borrowedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.returnedDate != null">
+        returned_date = #{record.returnedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isReturned != null">
+        is_returned = #{record.isReturned,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update book_toborrow_tbl
+    set book_toBorrow_id = #{record.bookToborrowId,jdbcType=INTEGER},
+      book_id = #{record.bookId,jdbcType=INTEGER},
+      reader_id = #{record.readerId,jdbcType=INTEGER},
+      borrowed_date = #{record.borrowedDate,jdbcType=TIMESTAMP},
+      returned_date = #{record.returnedDate,jdbcType=TIMESTAMP},
+      is_returned = #{record.isReturned,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fc.entity.BookToborrowTbl">
+    update book_toborrow_tbl
+    <set>
+      <if test="bookId != null">
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="readerId != null">
+        reader_id = #{readerId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowedDate != null">
+        borrowed_date = #{borrowedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnedDate != null">
+        returned_date = #{returnedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isReturned != null">
+        is_returned = #{isReturned,jdbcType=TINYINT},
+      </if>
+    </set>
+    where book_toBorrow_id = #{bookToborrowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fc.entity.BookToborrowTbl">
+    update book_toborrow_tbl
+    set book_id = #{bookId,jdbcType=INTEGER},
+      reader_id = #{readerId,jdbcType=INTEGER},
+      borrowed_date = #{borrowedDate,jdbcType=TIMESTAMP},
+      returned_date = #{returnedDate,jdbcType=TIMESTAMP},
+      is_returned = #{isReturned,jdbcType=TINYINT}
+    where book_toBorrow_id = #{bookToborrowId,jdbcType=INTEGER}
+  </update>
+
+  <!--书籍类的映射-->
+  <resultMap id="bookTblAll" type="com.fc.entity.BookTbl">
+    <id column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="book_author" jdbcType="VARCHAR" property="bookAuthor" />
+    <result column="book_press" jdbcType="VARCHAR" property="bookPress" />
+    <result column="book_price" jdbcType="REAL" property="bookPrice" />
+    <result column="book_language" jdbcType="VARCHAR" property="bookLanguage" />
+    <result column="book_pdfURL" jdbcType="VARCHAR" property="bookPdfurl" />
+    <result column="book_entry_time" jdbcType="TIMESTAMP" property="bookEntryTime" />
+    <result column="toBorrow_times" jdbcType="INTEGER" property="toborrowTimes" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <result column="borrowed_times" jdbcType="INTEGER" property="borrowedTimes" />
+    <result column="book_case_id" jdbcType="INTEGER" property="bookCaseId" />
+    <association property="bookType" javaType="com.fc.entity.BookTypeTbl">
+      <id column="type_id" property="typeId"/>
+      <result column="type_name" property="typeName"/>
+      <result column="toBorrow_days" property="toborrowDays"/>
+    </association>
+    <association property="bookcase" javaType="com.fc.entity.BookcaseTbl">
+      <id column="bookcase_id" property="bookcaseId"/>
+      <result column="bookcase_name"  property="bookcaseName"/>
+    </association>
+    <association property="manager" javaType="com.fc.entity.ManagerTbl">
+      <id column="manager_id" jdbcType="INTEGER" property="managerId" />
+      <result column="manager_name" jdbcType="VARCHAR" property="managerName" />
+      <result column="manager_pwd" jdbcType="VARCHAR" property="managerPwd" />
+    </association>
+  </resultMap>
+  <!--根据名字 查询书籍-->
+  <select id="selectBook" resultMap="bookTblAll">
+    select * from book_tbl bt
+            inner join book_type_tbl btt on bt.type_id = btt.type_id
+            inner join bookcase_tbl bct on bt.book_case_id = bct.bookcase_id
+            inner join manager_tbl mat on bt.operator_id=mat.manager_id
+            where book_name like #{searchText}
+  </select>
+
+  <resultMap id="ReaderInfo_Tbl" type="com.fc.entity.ReaderTbl">
+    <id column="reader_id" jdbcType="INTEGER" property="readerId" />
+    <result column="reader_name" jdbcType="VARCHAR" property="readerName" />
+    <result column="reader_gender" jdbcType="VARCHAR" property="readerGender" />
+    <result column="reader_barcode" jdbcType="VARCHAR" property="readerBarcode" />
+    <result column="reader_profession" jdbcType="VARCHAR" property="readerProfession" />
+    <result column="reader_birth" jdbcType="TIMESTAMP" property="readerBirth" />
+    <result column="reader_document_type" jdbcType="VARCHAR" property="readerDocumentType" />
+    <result column="reader_document_number" jdbcType="VARCHAR" property="readerDocumentNumber" />
+    <result column="reader_email" jdbcType="VARCHAR" property="readerEmail" />
+    <result column="reader_register_date" jdbcType="TIMESTAMP" property="readerRegisterDate" />
+    <result column="borrowed_book_count" jdbcType="INTEGER" property="borrowedBookCount" />
+    <result column="remaining_book_count" jdbcType="INTEGER" property="remainingBookCount" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <association property="manager" javaType="com.fc.entity.ManagerTbl">
+      <id column="manager_id" jdbcType="INTEGER" property="managerId" />
+      <result column="manager_name" jdbcType="VARCHAR" property="managerName" />
+      <result column="manager_pwd" jdbcType="VARCHAR" property="managerPwd" />
+    </association>
+  </resultMap>
+  <!--通过条形码查询出读者信息-->
+  <select id="barFindReader" resultMap="ReaderInfo_Tbl">
+    select * from reader_tbl
+            where reader_barcode=#{barcode}
+  </select>
+</mapper>
