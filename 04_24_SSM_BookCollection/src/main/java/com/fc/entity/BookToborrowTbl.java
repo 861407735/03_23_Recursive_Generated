@@ -1,21 +1,29 @@
 package com.fc.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Date;
 @Component
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookToborrowTbl implements Serializable {
-    private Integer bookToborrowId;
+    private Integer bookToborrowId;  //借阅编号
 
-    private Integer bookId;
+    private Integer bookId;         //书id
 
-    private Integer readerId;
+    private BookTbl book;     //书籍类
+
+    private Integer readerId;       //读者id
     @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm:ss" )
-    private Date borrowedDate;
+    private Date borrowedDate; //借书时间
     @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm:ss" )
-    private Date returnedDate;
+    private Date returnedDate;  //返还时间
 
     private Byte isReturned;
 

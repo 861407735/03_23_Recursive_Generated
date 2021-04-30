@@ -52,4 +52,18 @@ public interface BookToborrowTblMapper {
      * @return
      */
     ReaderTbl barFindReader(@Param("barcode") String readerBarCode);
+
+    /**
+     * 查询读者借阅信息
+     * @param readerId
+     * @return
+     */
+    List<BookToborrowTbl> findReaderBorrowInfo(Integer readerId);
+
+    /**
+     * 查询没有归还信息
+     * @param bookToBorrowExample
+     * @return
+     */
+    List<BookToborrowTbl> selectByExampleWithBook(BookToborrowTblExample bookToBorrowExample);
 }

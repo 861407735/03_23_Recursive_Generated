@@ -1,5 +1,6 @@
 package com.fc.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -11,13 +12,13 @@ public class BookReturnTbl implements Serializable {
     private Integer bookId;
 
     private String bookName;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm:ss" )
     private Date toborrowDate;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm:ss" )
     private Date toreturnDate;
 
     private Integer borrowerId;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm:ss" )
     private Date retrunDate;
 
     public Integer getBookReturnId() {

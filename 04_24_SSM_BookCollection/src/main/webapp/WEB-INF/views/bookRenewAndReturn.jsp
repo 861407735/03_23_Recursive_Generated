@@ -189,7 +189,7 @@
 
     //3-1. 获取读者信息并显示在界面上
     function show_reader_info(result) {
-        var readerData = result.extend.reader[0];
+        var readerData = result.extend.reader;
         $("#readerName").val(readerData.readerName);
         $("#readerDocumentType").val(readerData.readerDocumentType);
         $("#readerNum").val(readerData.readerId);
