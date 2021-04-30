@@ -55,4 +55,12 @@ public interface BookTblMapper {
      * @return
      */
     List<BookcaseTbl> findBookCase();
+
+    /**
+     * 通过书籍类型id
+     * 查询出对应类型
+     * @param bookTypeId
+     * @return
+     */
+    BookTypeTbl findIdBookType(Integer bookTypeId);
 }

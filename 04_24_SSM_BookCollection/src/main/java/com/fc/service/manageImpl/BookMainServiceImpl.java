@@ -36,6 +36,17 @@ public class BookMainServiceImpl implements BookMainService {
     }
 
     /**
+     * 通过书籍类型id
+     * 查询书籍类型所对应的类
+     * @param bookTypeId
+     * @return
+     */
+    @Override
+    public BookTypeTbl findIdBookType(Integer bookTypeId) {
+        return bookTblMapper.findIdBookType(bookTypeId);
+    }
+
+    /**
      * 查询书籍的放置情况
      * @return
      */

@@ -1,5 +1,6 @@
 package com.fc.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -11,9 +12,9 @@ public class BookToborrowTbl implements Serializable {
     private Integer bookId;
 
     private Integer readerId;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm:ss" )
     private Date borrowedDate;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm:ss" )
     private Date returnedDate;
 
     private Byte isReturned;

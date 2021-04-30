@@ -390,6 +390,10 @@
   <select id="findBookTypes" resultMap="BookTypes">
     select * from book_type_tbl
   </select>
+  <!--通过id查询书籍类型-->
+  <select id="findIdBookType" resultMap="BookTypes">
+    select * from book_type_tbl where type_id=#{bookTypeId}
+  </select>
 
 
   <resultMap id="BookCase" type="com.fc.entity.BookcaseTbl">

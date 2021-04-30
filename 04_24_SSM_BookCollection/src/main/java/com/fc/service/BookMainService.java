@@ -18,6 +18,10 @@ public interface BookMainService {
      * 查询获取书类型
      */
     List<BookTypeTbl> findBookTypes();
+    /**
+     * 通过id查询书籍类型
+     */
+    BookTypeTbl findIdBookType(Integer bookTypeId);
 
     /**
      * 查询书放置的情况
