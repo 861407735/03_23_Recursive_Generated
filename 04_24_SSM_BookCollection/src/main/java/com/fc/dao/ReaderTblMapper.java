@@ -63,4 +63,11 @@ public interface ReaderTblMapper {
      */
     List<ReaderTbl> findAllReader();
 
+    /**
+     * 修改可借阅次数-1
+     * 总借阅次数+1
+     * @param readerId
+     * @return
+     */
+    int updateByIdBorrow(Integer readerId);
 }

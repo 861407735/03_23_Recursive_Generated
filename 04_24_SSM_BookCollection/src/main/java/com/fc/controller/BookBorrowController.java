@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -60,12 +61,21 @@ public class BookBorrowController {
     }
     @RequestMapping("borrowBook")
     public Msg borrowBooks(@RequestParam("readerId") Integer readerId,@RequestParam("bookId") Integer bookId){
+        //借阅书籍信息的类
         BookToborrowTbl bookToborrow=new BookToborrowTbl();
         bookToborrow.setBookId(bookId);             //书籍id
         bookToborrow.setReaderId(readerId);         //读者id
         bookToborrow.setBorrowedDate(new Date());  //借书时间
+        bookToborrow.setReturnedDate(getReturnTime(bookId));  //还书时间
+        bookBorrowService.borrowBook(bookToborrow);  //插入新的借阅信息
+        //读者类
+        int affectedRow = bookBorrowService.updateReaderBorrow(readerId);  //读者借阅次数+1以及可借阅次数-1
 
-        return null;
+
+        //书籍类
+        bookBorrowService.bookBorrowNumber(bookId);  //书籍借用数量加1  -1  状态 已借出
+
+        return Msg.success();
     }
 
     /**
@@ -73,10 +83,15 @@ public class BookBorrowController {
      * 1.查询书可借阅的时间 再加上当前时间 就是还书时间
      */
     public Date getReturnTime(Integer bookId){
+        //通过查询书籍获取类 并调用书籍类型id
         BookTbl book = bookMainService.findBook(bookId);
         //通过书籍类型id 获取类型对应的类
         BookTypeTbl bookType = bookMainService.findIdBookType(book.getTypeId());
-
-        return null;
+        Date returnTime =new Date();
+        Calendar calendar=Calendar.getInstance();   //通过反射创建日历对象
+        calendar.setTime(returnTime);
+        calendar.add(Calendar.DATE,bookType.getToborrowDays());  //当前时间加上通过类型获取的可借阅时间
+        returnTime=calendar.getTime();
+        return returnTime;
     }
 }

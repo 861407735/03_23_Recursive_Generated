@@ -395,4 +395,11 @@
     VALUES (#{readerId},#{readerName},#{readerGender},#{readerBarcode},#{readerProfession},#{readerBirth},#{readerDocumentType},
             #{readerDocumentNumber},#{readerEmail},#{readerRegisterDate},#{borrowedBookCount},#{remainingBookCount},#{operatorId})
   </insert>
+  <!--修改可借阅次数和总次数-->
+  <update id="updateByIdBorrow" parameterType="java.lang.Integer">
+    update reader_tbl set borrowed_book_count = borrowed_book_count+1,
+                          remaining_book_count =remaining_book_count-1
+                        where reader_Id=#{readerId}
+
+  </update>
 </mapper>

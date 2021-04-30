@@ -19,6 +19,11 @@ public interface BookToborrowTblMapper {
 
     int insert(BookToborrowTbl record);
 
+    /**
+     * 插入新的借阅信息
+     * @param record
+     * @return
+     */
     int insertSelective(BookToborrowTbl record);
 
     List<BookToborrowTbl> selectByExample(BookToborrowTblExample example);

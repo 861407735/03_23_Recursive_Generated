@@ -35,11 +35,11 @@ public class ReaderTbl implements Serializable {
     private String readerEmail;  //邮箱
 
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private Date readerRegisterDate;
+    private Date readerRegisterDate;  //书籍注册的时间
 
-    private Integer borrowedBookCount;
+    private Integer borrowedBookCount;  //借来的书数
 
-    private Integer remainingBookCount;
+    private Integer remainingBookCount;  //读者可借阅的次数
 
     private Integer operatorId;
 
