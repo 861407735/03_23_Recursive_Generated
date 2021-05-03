@@ -1,6 +1,8 @@
 package com.fc.service.manageImpl;
 
+import com.fc.dao.BookReturnTblMapper;
 import com.fc.dao.BookToborrowTblMapper;
+import com.fc.entity.BookReturnTbl;
 import com.fc.entity.BookToborrowTbl;
 import com.fc.entity.BookToborrowTblExample;
 import com.fc.service.BookRenewService;
@@ -12,20 +14,11 @@ import java.util.List;
 @Service
 public class BookRenewServiceImpl implements BookRenewService {
     @Autowired
-    private BookToborrowTblMapper bookToborrowTblMapper;
+    private BookReturnTblMapper bookReturnTblMapper;
 
-    /**
-     * 查询出 读者 的借阅信息
-     * @param readerId
-     * @return
-     */
+
     @Override
-    public List<BookToborrowTbl> findReaderBorrowInfo(Integer readerId) {
-        BookToborrowTblExample bookToBorrowExample = new BookToborrowTblExample();
-        BookToborrowTblExample.Criteria criteria = bookToBorrowExample.createCriteria();
-        criteria.andReaderIdEqualTo(readerId);
-        criteria.andIsReturnedEqualTo((byte)(0));  //只查出未归还的数据
-        List<BookToborrowTbl> bookToBorrowList = bookToborrowTblMapper.selectByExampleWithBook(bookToBorrowExample);
-        return bookToBorrowList;
+    public int insrtBookReturnInfo(BookReturnTbl bookReturnTbl) {
+        return bookReturnTblMapper.insertSelective(bookReturnTbl);
     }
 }

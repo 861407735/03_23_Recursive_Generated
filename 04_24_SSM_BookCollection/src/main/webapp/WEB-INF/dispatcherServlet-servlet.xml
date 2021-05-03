@@ -50,6 +50,17 @@
     <!-- 放行静态资源-->
     <mvc:default-servlet-handler/>
     <!-- 3. 配置 SpringMVC 的注解支持-->
-    <mvc:annotation-driven/>
+
+    <!--配置转换器-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="customObjectMapper"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!--注入配置类-->
+    <bean id="customObjectMapper" class="com.fc.config.CustomObjectMapper"/>
+
 
 </beans>

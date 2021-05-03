@@ -17,7 +17,7 @@ public class BookReturnTbl implements Serializable {
     @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm:ss" )
     private Date toreturnDate;
 
-    private Integer borrowerId;
+    private Integer borrowerId;  //借阅人id
     @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm:ss" )
     private Date retrunDate;
 

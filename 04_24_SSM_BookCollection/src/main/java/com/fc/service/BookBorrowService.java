@@ -28,8 +28,8 @@ public interface BookBorrowService {
     int borrowBook(BookToborrowTbl bookToborrow);
 
     /**
-     * 书籍借阅次数加一
-     * 可借阅次数-1
+     * 书籍续可借次数-1
+     * 续借次数+1
      * 类型改为已借出
      * @param bookId
      * @return
@@ -41,4 +41,23 @@ public interface BookBorrowService {
      * @return
      */
     int updateReaderBorrow(Integer readerId);
+    /**
+     * 查询读者借阅信息
+     * @param
+     * @param readerId
+     * @return
+     */
+    List<BookToborrowTbl> findReaderBorrowInfo(Integer readerId);
+
+    /**
+     * 通过id查询借书信息
+     * @return
+     */
+    BookToborrowTbl findBorrowInfoById(Integer borrowId);
+
+    /**
+     * 修改后的信息
+     * @param
+     */
+    int UpdateBorrowInfo(BookToborrowTbl borrowInfoById);
 }

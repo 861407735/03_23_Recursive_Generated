@@ -25,7 +25,7 @@ public class LoginController {
      * 判断账号是否存在
      */
     @RequestMapping(value = "/checkManagerNameExists")
-    public Msg checkManagerNameExists(@RequestParam("mangerName") String managerName){
+    public Msg checkManagerNameExists(@RequestParam("managerName") String managerName){
         boolean b = manageService.findManageName(managerName);
         if(b){
             return Msg.success().add("va_login_name_msg","用户名不存在！请注册").add("va_register_name_msg","用户名可用！");
@@ -81,4 +81,13 @@ public class LoginController {
         }
         return Msg.fail();
     }
+    /**
+     * 管理员 修改密码
+     */
+    @PostMapping("/changeManagerPwd")
+    public Msg checkManagerPwd(@RequestParam("managerName") String managerName, @RequestParam("newPwd2rd") String newPwd){
+        manageService.updatePassword(managerName,newPwd);
+        return Msg.success();
+    }
+
 }

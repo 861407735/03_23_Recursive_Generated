@@ -200,4 +200,8 @@
   <select id="findAllManagersInfo" resultType="com.fc.entity.ManagerTbl">
         select * from manager_tbl
   </select>
+
+  <update id="updatePassword" parameterType="java.lang.String">
+    update manager_tbl set manager_pwd=#{pwd} where manager_name=#{name}
+  </update>
 </mapper>

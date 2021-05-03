@@ -87,4 +87,9 @@ public class ManageServiceImpl implements ManageService {
     public int deleteManager(Integer id) {
         return managerTblMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public int updatePassword(String managerName, String newPwd) {
+        return managerTblMapper.updatePassword(managerName,newPwd);
+    }
 }

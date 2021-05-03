@@ -14,7 +14,7 @@ public class LoginIntercept implements HandlerInterceptor {
         String surl = request.getRequestURI();
         StringBuffer sburl=request.getRequestURL();
         //登陆时需要执行的Ajax操作
-        if(sburl.indexOf("Manager")>=0){
+        if(sburl.indexOf("anager")>=0){
             System.out.println("管理操作");
             return true;
         }

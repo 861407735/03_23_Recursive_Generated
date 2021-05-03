@@ -49,4 +49,12 @@ public interface ManagerTblMapper {
     int registerManager(@Param("user") String managerName, @Param("pwd") String confirmPwd);
 
     List<ManagerTbl> findAllManagersInfo();
+
+    /**
+     * 修改密码
+     * @param managerName
+     * @param newPwd
+     * @return
+     */
+    int updatePassword(@Param("name") String managerName,@Param("pwd")String newPwd);
 }

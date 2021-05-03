@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * 图书借阅  页面：bookBorrow.jsp
+ * 图书续借  页面 bookRenewAndReturn.jsp
  */
 @RestController
 public class BookBorrowController {
@@ -52,13 +53,19 @@ public class BookBorrowController {
     public Msg barFindReader(@PathVariable("barcode")String readerBarCode){
 
         ReaderTbl readerTbl = bookBorrowService.barFindReader(readerBarCode);
-        System.out.println(readerTbl.getReaderName());
             if(readerTbl==null){
                 return Msg.fail().add("checkReader_msg","用户不存在");
             }else{
                 return Msg.success().add("reader",readerTbl);
             }
     }
+
+    /**
+     * 借书
+     * @param readerId
+     * @param bookId
+     * @return
+     */
     @RequestMapping("borrowBook")
     public Msg borrowBooks(@RequestParam("readerId") Integer readerId,@RequestParam("bookId") Integer bookId){
         //借阅书籍信息的类
@@ -93,5 +100,36 @@ public class BookBorrowController {
         calendar.add(Calendar.DATE,bookType.getToborrowDays());  //当前时间加上通过类型获取的可借阅时间
         returnTime=calendar.getTime();
         return returnTime;
+    }
+    /**
+     * 查询读者借阅信息
+     * @return
+     */
+    @RequestMapping("readerBorrowedBooks")
+    public Msg findReaderBorrowInfo(@RequestParam("pn") Integer pn,@RequestParam("readerId") Integer readerId){
+        PageHelper.startPage(pn,10);
+
+        List<BookToborrowTbl> readerBorrowInfo = bookBorrowService.findReaderBorrowInfo(readerId);
+
+        PageInfo<BookToborrowTbl> pageInfo=new PageInfo<>(readerBorrowInfo);
+
+        return Msg.success().add("pageInfo",pageInfo);
+    }
+    /**
+     * 图书续借
+     */
+    @RequestMapping("renewBook")
+    public Msg renewBook(@RequestParam("toBorrowId") Integer toBorrowId,@RequestParam("bookId") Integer bookId){
+        //根据id查询出借书信息
+        BookToborrowTbl borrowInfoById = bookBorrowService.findBorrowInfoById(toBorrowId);
+        //获取还书时间  将时间向后延长一月
+        Date returnTime = getReturnTime(borrowInfoById.getBookId());
+        borrowInfoById.setReturnedDate(returnTime);
+        //Update修改后归还的日期
+        bookBorrowService.UpdateBorrowInfo(borrowInfoById);
+        //修改书籍的可续借次数
+        bookBorrowService.bookBorrowNumber(borrowInfoById.getBookId());
+
+        return Msg.success();
     }
 }

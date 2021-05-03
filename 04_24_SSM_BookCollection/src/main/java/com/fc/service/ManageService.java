@@ -44,4 +44,12 @@ public interface ManageService {
      * @return
      */
     int deleteManager(Integer id);
+
+    /**
+     * 修改密码
+     * @param managerName
+     * @param newPwd
+     * @return
+     */
+    int updatePassword(String managerName, String newPwd);
 }
